@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { assetsBaseUrl, product } from "../data";
 import "../style/product.css";
+import Buy from "./Buy";
 
 const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(0);
 
   const handleThumbnailClick = (index) => {
     setSelectedImageIndex(index);
+  };
+
+  const handleIncrement = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 0) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
+    }
   };
 
   return (
@@ -69,7 +81,11 @@ const ProductDetail = () => {
           <span className="old-price">250$</span>
         </div>
 
-        <div className="buy"></div>
+        <Buy
+          quantity={quantity}
+          handleIncrement={handleIncrement}
+          handleDecrement={handleDecrement}
+        />
       </div>
     </div>
   );
