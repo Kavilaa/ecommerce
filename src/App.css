@@ -13,6 +13,15 @@ body {
   list-style: none;
 }
 
+.nav-links ul li {
+  color: var(--dark-grayish-blue);
+  cursor: pointer;
+}
+
+.nav-links ul li:hover {
+  color: var(--black);
+}
+
 .cart {
   margin-left: auto;
   align-items: center;
