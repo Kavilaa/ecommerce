@@ -1,10 +1,26 @@
+// Header.jsx
+import React, { useEffect, useState } from "react";
 import CartBox from "./CartBox";
-import React, { useState } from "react";
+import eventManager from "../EventManager";
 
 const Header = () => {
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const [cart, setCart] = useState([]);
+
   const handleCartIconClick = () => {
     setIsCartVisible(!isCartVisible);
+  };
+
+  useEffect(() => {
+    const subscription = eventManager.subscribe("addToCart", handleAddToCart);
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleAddToCart = (cartList) => {
+    setCart(cartList);
   };
 
   return (
@@ -43,7 +59,7 @@ const Header = () => {
                 fill-rule="nonzero"
               />
             </svg>
-            {isCartVisible && <CartBox />}
+            {isCartVisible && <CartBox cart={cart} />}
             <img
               src="/src/assets/user-placeholder.png"
               alt=""

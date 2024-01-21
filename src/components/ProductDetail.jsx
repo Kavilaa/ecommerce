@@ -1,11 +1,21 @@
+// ProductDetail.jsx
 import React, { useState } from "react";
 import { assetsBaseUrl, product } from "../data";
 import "../style/product.css";
 import Buy from "./Buy";
+import eventManager from "../EventManager";
 
 const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [cartList, setCartList] = useState([]);
+
+  const productInfo = {
+    productName: "Fall Limited Edition Sneakers",
+    productQuantity: quantity,
+    productPrice: 125,
+    productImageUrl: product.images.thumbnails[0],
+  };
 
   const handleThumbnailClick = (index) => {
     setSelectedImageIndex(index);
@@ -19,6 +29,11 @@ const ProductDetail = () => {
     if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
+  };
+
+  const addToCart = () => {
+    setCartList([...cartList, productInfo]);
+    eventManager.publish("addToCart", cartList);
   };
 
   return (
@@ -82,9 +97,11 @@ const ProductDetail = () => {
         </div>
 
         <Buy
+          productInfo={productInfo}
           quantity={quantity}
           handleIncrement={handleIncrement}
           handleDecrement={handleDecrement}
+          addToCart={addToCart}
         />
       </div>
     </div>

@@ -1,0 +1,84 @@
+.forms-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.stars-container {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  transition: fill 0.3s;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.review-form-container {
+  margin-top: 20px;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form label {
+  margin-bottom: 5px;
+}
+
+.submit-button {
+  margin-top: 10px;
+  background-color: var(--Orange);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 50px 0px;
+  margin-right: 10px;
+}
+
+.cancel-button {
+  margin-top: 10px;
+  background-color: var(--dark-grayish-blue);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 50px 0px;
+  margin-right: 10px;
+}
+
+.submit-button:hover {
+  background-color: var(--light-orange);
+}
+
+.cancel-button:hover {
+  background-color: var(--grayish-blue);
+}
+
+.for-headline {
+  margin: 30px 0px;
+}
+
+.headline-input {
+  position: relative;
+  bottom: -20px;
+  left: -65px;
+  min-width: 250px;
+  max-width: 600px;
+}
+
+.review {
+  position: relative;
+  bottom: -25px;
+  left: -115px;
+  min-width: 250px;
+  max-width: 600px;
+}

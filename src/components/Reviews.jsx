@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../style/reviews.css";
 import placeholderImage from "../assets/user-placeholder.png";
 import { product, assetsBaseUrl, loggedInUser } from "../data";
+import Forms from "./Forms";
 
 const renderStars = (rating) => {
   const stars = [];
@@ -27,52 +28,87 @@ const renderStars = (rating) => {
 };
 
 const Reviews = () => {
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [reviews, setReviews] = useState(product.reviews);
+  const [forceRerender, setForceRerender] = useState(false);
+
+  const handleCancel = () => {
+    setShowReviewForm(false);
+  };
+
+  const handleWriteReviewClick = () => {
+    setShowReviewForm(true);
+  };
+
+  const handleReviewSubmit = (newReview) => {
+    setReviews((prevReviews) => [
+      ...prevReviews,
+      { ...newReview, user: loggedInUser.name },
+    ]);
+    setShowReviewForm(false);
+    setForceRerender(true);
+  };
+
   const handleEdit = (reviewId) => {
-    // Handle edit action, e.g., navigate to an edit page
     console.log(`Edit review with ID ${reviewId}`);
   };
 
   const handleDelete = (reviewId) => {
-    // Handle delete action, e.g., delete the review from the state
     console.log(`Delete review with ID ${reviewId}`);
   };
+
+  useEffect(() => {
+    setForceRerender(false);
+  }, [forceRerender]);
 
   return (
     <div>
       <div className="container rev-head">
         <h1>Customer reviews</h1>
-        <button className="write-review"> Write a review </button>
+        {!showReviewForm && (
+          <button className="write-review" onClick={handleWriteReviewClick}>
+            Write a review
+          </button>
+        )}
       </div>
 
-      <div className="feedback">
-        {product.reviews.map((review, index) => (
-          <div key={index} className="review-item">
-            <div className="user-info">
-              <img
-                src={
-                  review.user === loggedInUser.name
-                    ? `${assetsBaseUrl}/${loggedInUser.profileImage}`
-                    : placeholderImage
-                }
-                alt={`Profile of ${review.user}`}
-                className="profile-image"
-              />
+      {showReviewForm ? (
+        <Forms
+          onReviewSubmit={handleReviewSubmit}
+          onCancel={handleCancel}
+          onUpdateReviews={() => setForceRerender(true)}
+        />
+      ) : (
+        <div className="feedback">
+          {reviews.map((review, index) => (
+            <div key={index} className="review-item">
+              <div className="user-info">
+                <img
+                  src={
+                    review.user === loggedInUser.name
+                      ? `${assetsBaseUrl}/${loggedInUser.profileImage}`
+                      : placeholderImage
+                  }
+                  alt={`Profile of ${review.user}`}
+                  className="profile-image"
+                />
+              </div>
+              <div className="review-details">
+                <p className="user-name">{review.user}</p>
+                <div className="rating">{renderStars(review.starRating)}</div>
+                <h3 className="headline">{review.headline}</h3>
+                <p className="written-review">{review.writtenReview}</p>
+                {review.user === loggedInUser.name && (
+                  <div className="edit-delete-buttons">
+                    <button onClick={() => handleEdit(index)}>Edit</button>
+                    <button onClick={() => handleDelete(index)}>Delete</button>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="review-details">
-              <p className="user-name">{review.user}</p>
-              <div className="rating">{renderStars(review.starRating)}</div>
-              <h3 className="headline">{review.headline}</h3>
-              <p className="written-review">{review.writtenReview}</p>
-              {review.user === loggedInUser.name && (
-                <div className="edit-delete-buttons">
-                  <button onClick={() => handleEdit(index)}>Edit</button>
-                  <button onClick={() => handleDelete(index)}>Delete</button>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
