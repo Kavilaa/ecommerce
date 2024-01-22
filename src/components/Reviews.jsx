@@ -31,6 +31,8 @@ const Reviews = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviews, setReviews] = useState(product.reviews);
   const [forceRerender, setForceRerender] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [editReviewIndex, setEditReviewIndex] = useState(null);
 
   const handleCancel = () => {
     setShowReviewForm(false);
@@ -41,20 +43,40 @@ const Reviews = () => {
   };
 
   const handleReviewSubmit = (newReview) => {
-    setReviews((prevReviews) => [
-      ...prevReviews,
-      { ...newReview, user: loggedInUser.name },
-    ]);
+    if (editReviewIndex !== null) {
+      setReviews((prevReviews) => {
+        const updatedReviews = [...prevReviews];
+        updatedReviews[editReviewIndex] = {
+          ...newReview,
+          user: loggedInUser.name,
+        };
+        return updatedReviews;
+      });
+      setEditReviewIndex(null);
+    } else {
+      setReviews((prevReviews) => [
+        ...prevReviews,
+        { ...newReview, user: loggedInUser.name },
+      ]);
+    }
+
     setShowReviewForm(false);
     setForceRerender(true);
+    setReviewSubmitted(true);
   };
 
   const handleEdit = (reviewId) => {
     console.log(`Edit review with ID ${reviewId}`);
+    setEditReviewIndex(reviewId);
+    setShowReviewForm(true);
   };
 
   const handleDelete = (reviewId) => {
-    console.log(`Delete review with ID ${reviewId}`);
+    const updatedReviews = reviews.filter(
+      (review, index) => index !== reviewId
+    );
+    setReviews(updatedReviews);
+    setReviewSubmitted(false);
   };
 
   useEffect(() => {
@@ -65,7 +87,7 @@ const Reviews = () => {
     <div>
       <div className="container rev-head">
         <h1>Customer reviews</h1>
-        {!showReviewForm && (
+        {!showReviewForm && !reviewSubmitted && (
           <button className="write-review" onClick={handleWriteReviewClick}>
             Write a review
           </button>
@@ -97,7 +119,7 @@ const Reviews = () => {
                 <p className="user-name">{review.user}</p>
                 <div className="rating">{renderStars(review.starRating)}</div>
                 <h3 className="headline">{review.headline}</h3>
-                <p className="written-review">{review.writtenReview}</p>
+                <p className="written-review">{review.review}</p>
                 {review.user === loggedInUser.name && (
                   <div className="edit-delete-buttons">
                     <button onClick={() => handleEdit(index)}>Edit</button>

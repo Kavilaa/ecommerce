@@ -45,7 +45,7 @@ const Forms = ({ onReviewSubmit, onCancel, onUpdateReviews }) => {
   const handleSubmit = (values) => {
     console.log("Form submitted with rating:", rating);
     console.log("Review Data:", values);
-    onReviewSubmit();
+    onReviewSubmit(values);
   };
 
   return (

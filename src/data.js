@@ -25,21 +25,21 @@ export const product = {
     {
       user: "Ryan Welles",
       starRating: 4,
-      writtenReview:
+      review:
         "The quality is good considering the affordable price point. They look good with jeans and are quite comfortable for daily wear.",
       headline: "Good for its price",
     },
     {
       user: "Emily Moore",
       starRating: 5,
-      writtenReview:
+      review:
         "Comfortable for long walks, and they've held up great so far. They've quickly become my go-to pair!",
       headline: "Great quality",
     },
     {
       user: "Patricia Lebsack",
       starRating: 5,
-      writtenReview:
+      review:
         "Absolutely love these sneakers! They have a sleek, modern design with a comfortable fit right out of the box.",
       headline: "Recommended",
     },

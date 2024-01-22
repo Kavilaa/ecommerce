@@ -71,4 +71,15 @@
 .product-price {
   position: relative;
   right: 60px;
+  bottom: 5px;
+}
+
+.checkout {
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  width: 80%;
+  height: 35px;
+  background-color: var(--Orange);
+  margin-left: 10%;
 }
