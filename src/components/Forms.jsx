@@ -3,7 +3,12 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../style/forms.css";
 
-const Forms = ({ onReviewSubmit, onCancel, onUpdateReviews }) => {
+const Forms = ({
+  onReviewSubmit,
+  onCancel,
+  onUpdateReviews,
+  editReviewData,
+}) => {
   const [rating, setRating] = useState(0);
 
   const handleStarClick = (selectedRating) => {
@@ -38,8 +43,8 @@ const Forms = ({ onReviewSubmit, onCancel, onUpdateReviews }) => {
   });
 
   const reviewInitialValues = {
-    headline: "",
-    review: "",
+    headline: editReviewData ? editReviewData.headline : "",
+    review: editReviewData ? editReviewData.review : "",
   };
 
   const handleSubmit = (values) => {

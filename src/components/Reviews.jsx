@@ -40,6 +40,7 @@ const Reviews = () => {
 
   const handleWriteReviewClick = () => {
     setShowReviewForm(true);
+    setEditReviewIndex(null);
   };
 
   const handleReviewSubmit = (newReview) => {
@@ -66,7 +67,6 @@ const Reviews = () => {
   };
 
   const handleEdit = (reviewId) => {
-    console.log(`Edit review with ID ${reviewId}`);
     setEditReviewIndex(reviewId);
     setShowReviewForm(true);
   };
@@ -99,6 +99,9 @@ const Reviews = () => {
           onReviewSubmit={handleReviewSubmit}
           onCancel={handleCancel}
           onUpdateReviews={() => setForceRerender(true)}
+          editReviewData={
+            editReviewIndex !== null ? reviews[editReviewIndex] : null
+          }
         />
       ) : (
         <div className="feedback">

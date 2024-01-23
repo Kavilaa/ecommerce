@@ -35,7 +35,9 @@ const CartBox = ({ cart }) => {
                 </li>
               ))}
           </ul>
-          <button className="checkout">Checkout</button>
+          <button style={{ cursor: "pointer" }} className="checkout">
+            Checkout
+          </button>
         </div>
       )}
     </div>
