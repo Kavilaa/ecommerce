@@ -23,6 +23,12 @@ const Header = () => {
     setCart(cartList);
   };
 
+  const handleDeleteItem = (index) => {
+    const newCart = [...cart];
+    newCart.splice(index, 1);
+    setCart(newCart);
+  };
+
   return (
     <header>
       <div className="container">
@@ -59,7 +65,9 @@ const Header = () => {
                 fill-rule="nonzero"
               />
             </svg>
-            {isCartVisible && <CartBox cart={cart} />}
+            {isCartVisible && (
+              <CartBox cart={cart} onDeleteItem={handleDeleteItem} />
+            )}
             <img
               src="/src/assets/user-placeholder.png"
               alt=""
