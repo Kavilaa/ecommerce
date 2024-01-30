@@ -257,6 +257,11 @@
     border-radius: 50%;
     background: white;
     margin-left: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .next-button {
@@ -264,5 +269,10 @@
     border-radius: 50%;
     background: white;
     margin-right: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

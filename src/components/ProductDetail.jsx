@@ -59,10 +59,10 @@ const ProductDetail = () => {
             alt={`Product Original ${selectedImageIndex + 1}`}
           />
           <button className="prev-button" onClick={handlePrevClick}>
-            {"<"}
+            <span className="material-icons">chevron_left</span>
           </button>
           <button className="next-button" onClick={handleNextClick}>
-            {">"}
+            <span className="material-icons">chevron_right</span>
           </button>
         </div>
         <div className="cover-images">
