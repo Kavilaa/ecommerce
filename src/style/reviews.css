@@ -73,3 +73,49 @@
   font-weight: 400;
   line-height: 26px;
 }
+
+/* ! responsive */
+
+@media only screen and (max-width: 375px) {
+  .container.rev-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 15px;
+  }
+
+  .write-review {
+    width: 50px;
+  }
+
+  .write-review {
+    content: "Add ";
+    margin-right: 5px;
+  }
+
+  .write-review {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .review-item {
+    width: 100%;
+    margin-left: 0;
+    flex-direction: column;
+  }
+
+  .user-info {
+    margin-right: auto;
+  }
+
+  .edit-delete-buttons {
+    margin: 5px;
+  }
+
+  .edit-delete-buttons button {
+    margin-right: 2px;
+  }
+
+  .feedback {
+    margin-top: 50px;
+  }
+}

@@ -1,4 +1,3 @@
-// ProductDetail.jsx
 import React, { useState } from "react";
 import { assetsBaseUrl, product } from "../data";
 import "../style/product.css";
@@ -21,6 +20,18 @@ const ProductDetail = () => {
     setSelectedImageIndex(index);
   };
 
+  const handlePrevClick = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : product.images.thumbnails.length - 1
+    );
+  };
+
+  const handleNextClick = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex < product.images.thumbnails.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
   const handleIncrement = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
@@ -37,13 +48,22 @@ const ProductDetail = () => {
   };
 
   return (
-    <div className="container" style={{ display: "flex", marginTop: "70px" }}>
+    <div
+      className="container prod"
+      style={{ display: "flex", marginTop: "70px" }}
+    >
       <div className="images">
         <div className="main-image">
           <img
             src={`${assetsBaseUrl}/${product.images.originals[selectedImageIndex]}`}
             alt={`Product Original ${selectedImageIndex + 1}`}
           />
+          <button className="prev-button" onClick={handlePrevClick}>
+            {"<"}
+          </button>
+          <button className="next-button" onClick={handleNextClick}>
+            {">"}
+          </button>
         </div>
         <div className="cover-images">
           {product.images.thumbnails.map((thumbnail, index) => (

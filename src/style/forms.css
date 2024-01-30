@@ -82,3 +82,32 @@
   min-width: 250px;
   max-width: 600px;
 }
+
+.forms-btn {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* ! responsive */
+
+@media screen and (max-width: 375px) {
+  .forms-container {
+    max-width: 100%;
+  }
+
+  .stars-container {
+    flex-wrap: wrap;
+  }
+  .headline-input {
+    margin-right: 43px;
+  }
+
+  .headline-input,
+  .review {
+    position: relative;
+    bottom: -25px;
+    left: 0;
+    max-width: 100%;
+  }
+}
